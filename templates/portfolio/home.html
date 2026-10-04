@@ -1,0 +1,1705 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" x-data="app()" :class="{'dark':dark}" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Zayebul Fardoush Zitu — Computer Science & Engineering Student and aspiring Software Developer.">
+
+    <meta name="keywords"
+        content="Zayebul Fardoush Zitu, Computer Science, Engineering, Django, Python, Data Science, Portfolio">
+
+    <meta name="author" content="Zayebul Fardoush Zitu">
+
+    <meta property="og:title"
+        content="Zayebul Fardoush Zitu — Computer Science & Engineering Student">
+
+    <meta property="og:description"
+        content="I design and build digital products that people love to use.">
+
+    <meta property="og:type" content="website">
+
+    <title>
+        Zayebul Fardoush Zitu — Computer Science & Engineering Student &amp; Frontend Dev
+    </title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['PT Sans', 'sans-serif'],
+                        body: ['DM Sans', 'sans-serif']
+                    },
+
+                    colors: {
+                        accent: '#FF6B2B',
+                        'accent-light': '#FF8F5C'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            font-family: 'DM Sans', sans-serif
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'PT Sans', sans-serif
+        }
+
+        body {
+            transition: background-color .3s, color .3s
+        }
+
+        /* Noise overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            opacity: .35;
+
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E")
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 5px
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #FF6B2B;
+            border-radius: 99px
+        }
+
+        /* Reveal on scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(26px);
+            transition:
+                opacity .6s cubic-bezier(.4, 0, .2, 1),
+                transform .6s cubic-bezier(.4, 0, .2, 1)
+        }
+
+        .reveal.in {
+            opacity: 1;
+            transform: none
+        }
+
+        .d1 {
+            transition-delay: .08s
+        }
+
+        .d2 {
+            transition-delay: .16s
+        }
+
+        .d3 {
+            transition-delay: .24s
+        }
+
+        .d4 {
+            transition-delay: .32s
+        }
+
+        /* Navigation underline */
+        .nl {
+            position: relative
+        }
+
+        .nl::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1.5px;
+            background: currentColor;
+            transition: width .22s cubic-bezier(.4, 0, .2, 1)
+        }
+
+        .nl:hover::after,
+        .nl.on::after {
+            width: 100%
+        }
+
+        .nl.on {
+            font-weight: 500
+        }
+
+        /* Shimmer button */
+        .shimmer {
+            position: relative;
+            overflow: hidden
+        }
+
+        .shimmer::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 60%;
+            height: 100%;
+            background: rgba(255, 255, 255, .18);
+            transform: skewX(-20deg);
+            transition: left .4s cubic-bezier(.4, 0, .2, 1)
+        }
+
+        .shimmer:hover::after {
+            left: 160%
+        }
+
+        /* Photo frames */
+        .pf {
+            overflow: hidden;
+            background: #d4d4d8
+        }
+
+        .pf img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block
+        }
+
+        /* Card hover */
+        .card-h {
+            transition:
+                transform .28s cubic-bezier(.4, 0, .2, 1),
+                border-color .18s
+        }
+
+        .card-h:hover {
+            transform: translateY(-4px)
+        }
+
+        /* Skill tag */
+        .stag {
+            transition: border-color .18s
+        }
+
+        [x-cloak] {
+            display: none !important
+        }
+    </style>
+</head>
+
+<body class="bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 antialiased">
+
+    <!-- ═══════════════════════════════════════════════
+         NAVBAR
+    ═══════════════════════════════════════════════ -->
+    <header class="fixed inset-x-0 top-0 z-50 transition-all duration-300"
+        :class="sc?'bg-white/90 dark:bg-zinc-950/90 backdrop-blur-md shadow-sm shadow-black/5':''">
+
+        <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between"
+            aria-label="Main navigation">
+
+            <!-- Logo -->
+            <a href="#hero" class="font-display font-bold text-xl tracking-tight relative z-10">
+                <span class="text-zinc-900 dark:text-white">Zayebul</span><span class="text-accent">.</span>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <ul class="hidden md:flex items-center gap-8 text-sm" role="list">
+
+                <li>
+                    <a href="#services"
+                        class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
+                        :class="s==='services'?'on !text-zinc-900 dark:!text-white':''">
+                        Services
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#work"
+                        class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
+                        :class="s==='work'?'on !text-zinc-900 dark:!text-white':''">
+                        Work
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#about"
+                        class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
+                        :class="s==='about'?'on !text-zinc-900 dark:!text-white':''">
+                        About
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#reviews"
+                        class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
+                        :class="s==='reviews'?'on !text-zinc-900 dark:!text-white':''">
+                        Reviews
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#blog"
+                        class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
+                        :class="s==='blog'?'on !text-zinc-900 dark:!text-white':''">
+                        Blog
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#contact"
+                        class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
+                        :class="s==='contact'?'on !text-zinc-900 dark:!text-white':''">
+                        Contact
+                    </a>
+                </li>
+
+            </ul>
+
+            <!-- Right buttons -->
+            <div class="flex items-center gap-3">
+
+                <!-- Dark mode -->
+                <button @click="dark=!dark"
+                    class="w-9 h-9 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors"
+                    :aria-label="dark?'Light mode':'Dark mode'">
+
+                    <svg x-show="!dark" class="w-4 h-4" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+                    </svg>
+
+                    <svg x-show="dark" class="w-4 h-4" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+                    </svg>
+                </button>
+
+                <!-- Hire me -->
+                <a href="#contact"
+                    class="hidden md:inline-flex items-center gap-2 shimmer bg-accent text-white text-sm font-medium px-5 py-2 rounded-full hover:bg-accent-light transition-colors">
+                    Hire me
+
+                    <svg class="w-3.5 h-3.5" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                </a>
+
+                <!-- Mobile menu button -->
+                <button @click="mm=!mm"
+                    class="md:hidden w-9 h-9 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800"
+                    :aria-expanded="mm"
+                    aria-label="Toggle menu">
+
+                    <svg x-show="!mm" class="w-4 h-4" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+
+                    <svg x-show="mm" class="w-4 h-4" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+
+                </button>
+
+            </div>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div x-show="mm"
+            x-cloak
+            x-transition
+            class="md:hidden bg-white dark:bg-zinc-950 border-t border-zinc-100 dark:border-zinc-900">
+
+            <ul class="flex flex-col px-6 py-5 gap-4 text-sm font-medium">
+
+                <li>
+                    <a href="#services" @click="mm=false"
+                        class="block hover:text-accent transition-colors">
+                        Services
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#work" @click="mm=false"
+                        class="block hover:text-accent transition-colors">
+                        Work
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#about" @click="mm=false"
+                        class="block hover:text-accent transition-colors">
+                        About
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#reviews" @click="mm=false"
+                        class="block hover:text-accent transition-colors">
+                        Reviews
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#blog" @click="mm=false"
+                        class="block hover:text-accent transition-colors">
+                        Blog
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#contact" @click="mm=false"
+                        class="block hover:text-accent transition-colors">
+                        Contact
+                    </a>
+                </li>
+
+                <li class="pt-2 border-t border-zinc-100 dark:border-zinc-900">
+                    <a href="#contact"
+                        @click="mm=false"
+                        class="inline-flex shimmer bg-accent text-white font-medium text-sm px-5 py-2.5 rounded-full">
+                        Hire me →
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
+    </header>
+
+
+    <main>
+
+        <!-- ═══════════════════════════════════════════════
+             HERO
+        ═══════════════════════════════════════════════ -->
+        <section id="hero"
+            class="relative min-h-screen flex items-center pt-16 overflow-hidden">
+
+            <div class="absolute top-1/4 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="absolute bottom-1/4 left-0 w-64 h-64 bg-zinc-200/50 dark:bg-zinc-800/30 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="relative z-10 max-w-6xl mx-auto px-6 py-24 w-full">
+
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+
+                    <!-- Hero Text -->
+                    <div>
+
+                        {% if profile and profile.available_for_work %}
+                        <p class="reveal text-sm font-medium text-accent tracking-widest uppercase mb-4">
+                            Available for work
+                        </p>
+                        {% endif %}
+
+                        <h1
+                            class="reveal d1 font-display font-bold text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight text-zinc-900 dark:text-white mb-6">
+
+                            Hi, I'm
+
+                            <span class="text-accent">
+                                {{ profile.name|default:"Zayebul Fardoush Zitu" }}
+                            </span>
+
+                        </h1>
+
+                        <p
+                            class="reveal d2 text-lg md:text-xl text-zinc-500 dark:text-zinc-400 font-light leading-relaxed max-w-md mb-10">
+
+                            {{ profile.short_bio|default:"Computer Science & Engineering student interested in software development, Python, Django, Data Science and AI." }}
+
+                        </p>
+
+                        <div class="reveal d3 flex flex-wrap gap-4">
+
+                            <a href="#work"
+                                class="shimmer inline-flex items-center gap-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-medium px-7 py-3.5 rounded-full hover:bg-zinc-700 dark:hover:bg-zinc-200 transition-colors text-sm">
+
+                                View my work
+
+                                <svg class="w-4 h-4" fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M19 9l-7 7-7-7" />
+                                </svg>
+
+                            </a>
+
+                            <a href="#contact"
+                                class="inline-flex items-center gap-2 border border-zinc-300 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 font-medium px-7 py-3.5 rounded-full hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors text-sm">
+
+                                Get in touch
+
+                            </a>
+
+                        </div>
+
+                        <div class="reveal d4 flex gap-8 mt-14 pt-8 border-t border-zinc-100 dark:border-zinc-900">
+
+                            <div>
+                                <p class="font-display font-bold text-3xl">
+                                    {{ projects|length }}+
+                                </p>
+                                <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
+                                    Projects
+                                </p>
+                            </div>
+
+                            <div>
+                                <p class="font-display font-bold text-3xl">
+                                    21
+                                </p>
+                                <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
+                                    Years old
+                                </p>
+                            </div>
+
+                            <div>
+                                <p class="font-display font-bold text-3xl">
+                                    2+
+                                </p>
+                                <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
+                                    Years learning
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Hero Image -->
+                    <div class="reveal d2 flex justify-center md:justify-end">
+
+                        <div class="relative w-72 h-72 md:w-80 md:h-80 lg:w-96 lg:h-96">
+
+                            <div class="pf w-full h-full rounded-3xl">
+
+                                {% if profile and profile.profile_image %}
+                                <img src="{{ profile.profile_image.url }}"
+                                    alt="{{ profile.name }}"
+                                    loading="eager">
+                                {% else %}
+                                <div class="w-full h-full flex items-center justify-center bg-zinc-200 dark:bg-zinc-800">
+                                    <span class="text-zinc-500">Add Profile Image</span>
+                                </div>
+                                {% endif %}
+
+                            </div>
+
+                            <div
+                                class="absolute -bottom-4 -left-4 bg-accent text-white font-display font-bold text-sm px-4 py-2.5 rounded-2xl shadow-lg">
+                                Open to projects
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ═══════════════════════════════════════════════
+             SERVICES
+        ═══════════════════════════════════════════════ -->
+        <section id="services"
+            class="py-24 bg-zinc-50 dark:bg-zinc-900/40">
+
+            <div class="max-w-6xl mx-auto px-6">
+
+                <div class="mb-14">
+
+                    <p class="reveal text-xs font-medium text-accent tracking-widest uppercase mb-3">
+                        What I do
+                    </p>
+
+                    <h2 class="reveal d1 font-display font-bold text-4xl md:text-5xl">
+                        Services
+                    </h2>
+
+                </div>
+
+
+                <div class="grid md:grid-cols-3 gap-6">
+
+                    {% for service in services %}
+
+                    <article
+                        class="reveal d{{ forloop.counter }} card-h group bg-white dark:bg-zinc-900 rounded-2xl p-8 border border-zinc-100 dark:border-zinc-800 hover:border-accent">
+
+                        <div
+                            class="w-12 h-12 flex items-center justify-center bg-orange-50 dark:bg-zinc-800 rounded-xl mb-6 group-hover:bg-accent/10 transition-colors">
+
+                            {% if service.icon %}
+                            <span class="text-accent text-xl">
+                                {{ service.icon }}
+                            </span>
+                            {% else %}
+                            <span class="text-accent text-xl">✦</span>
+                            {% endif %}
+
+                        </div>
+
+                        <h3 class="font-display font-bold text-xl mb-3">
+                            {{ service.title }}
+                        </h3>
+
+                        <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                            {{ service.description }}
+                        </p>
+
+                    </article>
+
+                    {% empty %}
+
+                    <p class="text-zinc-500">
+                        Services will be added soon.
+                    </p>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ═══════════════════════════════════════════════
+             WORK / PROJECTS
+        ═══════════════════════════════════════════════ -->
+        <section id="work" class="py-24">
+
+            <div class="max-w-6xl mx-auto px-6">
+
+                <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-14">
+
+                    <div>
+
+                        <p class="reveal text-xs font-medium text-accent tracking-widest uppercase mb-3">
+                            Portfolio
+                        </p>
+
+                        <h2 class="reveal d1 font-display font-bold text-4xl md:text-5xl">
+                            Selected work
+                        </h2>
+
+                    </div>
+
+                    <span class="reveal d1 text-sm text-zinc-500">
+                        My recent projects
+                    </span>
+
+                </div>
+
+
+                <div class="grid md:grid-cols-2 gap-6">
+
+                    {% for project in projects %}
+
+                    <article
+                        class="card-h reveal d{{ forloop.counter }} group rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent">
+
+                        <!-- Project Image -->
+                        <div class="pf w-full h-64">
+
+                            {% if project.image %}
+                            <img src="{{ project.image.url }}"
+                                alt="{{ project.title }}"
+                                loading="lazy">
+                            {% else %}
+                            <div class="w-full h-full flex items-center justify-center bg-zinc-200 dark:bg-zinc-800">
+                                <span class="text-zinc-500">No project image</span>
+                            </div>
+                            {% endif %}
+
+                        </div>
+
+
+                        <div class="p-7">
+
+                            <!-- Technologies -->
+                            {% if project.technologies %}
+                            <div class="flex flex-wrap gap-2 mb-4">
+
+                                {% for tech in project.technologies.split %}
+                                <span
+                                    class="text-xs bg-orange-50 dark:bg-zinc-800 text-accent border border-orange-200 dark:border-zinc-700 px-3 py-1 rounded-full">
+                                    {{ tech }}
+                                </span>
+                                {% endfor %}
+
+                            </div>
+                            {% endif %}
+
+
+                            <a href="{% url 'portfolio:project_detail' project.slug %}">
+
+                                <h3 class="font-display font-bold text-2xl text-zinc-900 dark:text-white mb-2">
+                                    {{ project.title }}
+                                </h3>
+
+                            </a>
+
+
+                            <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-5">
+                                {{ project.short_description }}
+                            </p>
+
+
+                            <a href="{% url 'portfolio:project_detail' project.slug %}"
+                                class="inline-flex items-center gap-1.5 text-sm font-medium nl">
+
+                                View project
+
+                                <svg class="w-3.5 h-3.5" fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor">
+
+                                    <path stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M17 8l4 4m0 0l-4 4m4-4H3" />
+
+                                </svg>
+
+                            </a>
+
+                        </div>
+
+                    </article>
+
+                    {% empty %}
+
+                    <p class="text-zinc-500">
+                        No projects added yet.
+                    </p>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ═══════════════════════════════════════════════
+             ABOUT
+        ═══════════════════════════════════════════════ -->
+        <section id="about"
+    class="py-24 bg-zinc-50 dark:bg-zinc-900/40">
+
+    <div class="max-w-6xl mx-auto px-6">
+
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+
+            <!-- Image -->
+            <div class="reveal order-2 md:order-1">
+
+                <div class="pf w-full aspect-square max-w-sm mx-auto rounded-3xl">
+
+                    {% if profile and profile.profile_image %}
+                    <img src="{{ profile.profile_image.url }}"
+                        alt="{{ profile.name }}"
+                        loading="lazy">
+                    {% else %}
+                    <div class="w-full h-full flex items-center justify-center bg-zinc-200 dark:bg-zinc-800">
+                        <span class="text-zinc-500">Add Profile Image</span>
+                    </div>
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <!-- About text -->
+            <div class="order-1 md:order-2">
+
+                <p class="reveal text-xs font-medium text-accent tracking-widest uppercase mb-3">
+                    About me
+                </p>
+
+                <h2 class="reveal d1 font-display font-bold text-4xl md:text-5xl leading-tight mb-6">
+                    A bit about<br>
+                    who I am
+                </h2>
+
+                <p class="reveal d2 text-zinc-500 dark:text-zinc-400 leading-relaxed mb-8">
+                    {{ profile.about|default:"I am a Computer Science & Engineering student interested in software development, Python, Django, Data Science and Artificial Intelligence." }}
+                </p>
+
+
+                <!-- Skills -->
+                <div class="reveal d4">
+
+                    <p class="text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-widest mb-3">
+                        Skills &amp; tools
+                    </p>
+
+                    {% if skills %}
+
+                    <div x-data="{ view: 'tags' }">
+
+                        <!-- Toggle -->
+                        <div class="flex gap-2 mb-5" role="group" aria-label="Skills view">
+                            <button type="button"
+                                @click="view = 'tags'"
+                                :aria-pressed="view === 'tags'"
+                                :class="view === 'tags'
+                                    ? 'bg-accent text-white border-accent'
+                                    : 'bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border-zinc-200 dark:border-zinc-700'"
+                                class="text-xs px-3 py-1 rounded-full border transition-colors">
+                                Tags
+                            </button>
+
+                            <button type="button"
+                                @click="view = 'bars'"
+                                :aria-pressed="view === 'bars'"
+                                :class="view === 'bars'
+                                    ? 'bg-accent text-white border-accent'
+                                    : 'bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border-zinc-200 dark:border-zinc-700'"
+                                class="text-xs px-3 py-1 rounded-full border transition-colors">
+                                Progress
+                            </button>
+                        </div>
+
+                        <!-- Style 1: Tags -->
+                        <div x-show="view === 'tags'" x-cloak
+                            class="flex flex-wrap gap-2"
+                            role="list"
+                            aria-label="Skills">
+
+                            {% for skill in skills %}
+                            <span role="listitem"
+                                class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">
+                                {{ skill.name }}
+                            </span>
+                            {% endfor %}
+
+                        </div>
+
+                        <!-- Style 2: Progress bars -->
+                        <div x-show="view === 'bars'" x-cloak
+                            class="space-y-5"
+                            role="list"
+                            aria-label="Skills with proficiency">
+
+                            {% for skill in skills %}
+                            <div role="listitem">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-sm font-medium text-zinc-700 dark:text-zinc-300">
+                                        {{ skill.name }}
+                                    </span>
+                                    <span class="text-xs text-zinc-500 dark:text-zinc-400">
+                                        {{ skill.percentage }}%
+                                    </span>
+                                </div>
+
+                                <div class="w-full h-2 bg-zinc-200 dark:bg-zinc-800 rounded-full overflow-hidden">
+                                    <div class="h-full bg-accent rounded-full transition-all duration-700"
+                                        style="width: {{ skill.percentage }}%;">
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+
+                    {% else %}
+
+                    <p class="text-sm text-zinc-500">
+                        Skills will be added soon.
+                    </p>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+        </section>
+
+
+        <!-- ═══════════════════════════════════════════════
+             EDUCATION & EXPERIENCE
+        ═══════════════════════════════════════════════ -->
+        <section class="py-24">
+
+            <div class="max-w-6xl mx-auto px-6">
+
+                <div class="grid md:grid-cols-2 gap-12">
+
+                    <!-- Education -->
+                    <div>
+
+                        <p class="reveal text-xs font-medium text-accent tracking-widest uppercase mb-3">
+                            Education
+                        </p>
+
+                        <h2 class="reveal d1 font-display font-bold text-3xl mb-8">
+                            Academic journey
+                        </h2>
+
+                        <div class="space-y-5">
+
+                            {% for item in education %}
+
+                            <div
+                                class="reveal card-h bg-zinc-50 dark:bg-zinc-900 rounded-2xl p-6 border border-zinc-100 dark:border-zinc-800">
+
+                                <h3 class="font-display font-bold text-lg">
+                                    {{ item.degree }}
+                                </h3>
+
+                                <p class="text-accent text-sm font-medium mt-1">
+                                    {{ item.institution }}
+                                </p>
+
+                                <p class="text-xs text-zinc-500 mt-2">
+                                    {{ item.start_year }} – {{ item.end_year }}
+                                    {% if item.location %}
+                                    · {{ item.location }}
+                                    {% endif %}
+                                </p>
+
+                                {% if item.result %}
+                                <p class="text-sm text-zinc-600 dark:text-zinc-400 mt-3">
+                                    Result: {{ item.result }}
+                                </p>
+                                {% endif %}
+
+                                {% if item.description %}
+                                <p class="text-sm text-zinc-500 dark:text-zinc-400 mt-3 leading-relaxed">
+                                    {{ item.description }}
+                                </p>
+                                {% endif %}
+
+                            </div>
+
+                            {% empty %}
+
+                            <p class="text-zinc-500">
+                                Education information will be added soon.
+                            </p>
+
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Experience -->
+                    <div>
+
+                        <p class="reveal text-xs font-medium text-accent tracking-widest uppercase mb-3">
+                            Experience
+                        </p>
+
+                        <h2 class="reveal d1 font-display font-bold text-3xl mb-8">
+                            Experience
+                        </h2>
+
+                        <div class="space-y-5">
+
+                            {% for item in experiences %}
+
+                            <div
+                                class="reveal card-h bg-zinc-50 dark:bg-zinc-900 rounded-2xl p-6 border border-zinc-100 dark:border-zinc-800">
+
+                                <h3 class="font-display font-bold text-lg">
+                                    {{ item.position }}
+                                </h3>
+
+                                <p class="text-accent text-sm font-medium mt-1">
+                                    {{ item.company }}
+                                </p>
+
+                                <p class="text-xs text-zinc-500 mt-2">
+
+                                    {{ item.start_date|date:"M Y" }}
+
+                                    –
+
+                                    {% if item.current %}
+                                    Present
+                                    {% else %}
+                                    {{ item.end_date|date:"M Y" }}
+                                    {% endif %}
+
+                                </p>
+
+                                {% if item.description %}
+                                <p class="text-sm text-zinc-500 dark:text-zinc-400 mt-3 leading-relaxed">
+                                    {{ item.description }}
+                                </p>
+                                {% endif %}
+
+                            </div>
+
+                            {% empty %}
+
+                            <p class="text-zinc-500">
+                                Experience information will be added soon.
+                            </p>
+
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ═══════════════════════════════════════════════
+             ACHIEVEMENTS
+        ═══════════════════════════════════════════════ -->
+        {% if achievements %}
+
+        <section class="py-24 bg-zinc-50 dark:bg-zinc-900/40">
+
+            <div class="max-w-6xl mx-auto px-6">
+
+                <div class="mb-12">
+
+                    <p class="reveal text-xs font-medium text-accent tracking-widest uppercase mb-3">
+                        Highlights
+                    </p>
+
+                    <h2 class="reveal d1 font-display font-bold text-4xl md:text-5xl">
+                        Achievements
+                    </h2>
+
+                </div>
+
+
+                <div class="grid md:grid-cols-3 gap-6">
+
+                    {% for item in achievements %}
+
+                    <div
+                        class="reveal card-h bg-white dark:bg-zinc-900 rounded-2xl p-6 border border-zinc-100 dark:border-zinc-800">
+
+                        <h3 class="font-display font-bold text-lg">
+                            {{ item.title }}
+                        </h3>
+
+                        {% if item.organization %}
+                        <p class="text-accent text-sm mt-2">
+                            {{ item.organization }}
+                        </p>
+                        {% endif %}
+
+                        {% if item.date %}
+                        <p class="text-xs text-zinc-500 mt-2">
+                            {{ item.date|date:"M Y" }}
+                        </p>
+                        {% endif %}
+
+                        {% if item.description %}
+                        <p class="text-sm text-zinc-500 dark:text-zinc-400 mt-3 leading-relaxed">
+                            {{ item.description }}
+                        </p>
+                        {% endif %}
+
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+        </section>
+
+        {% endif %}
+
+
+        <!-- ═══════════════════════════════════════════════
+             TESTIMONIALS
+        ═══════════════════════════════════════════════ -->
+        <section id="reviews" class="py-24">
+
+            <div class="max-w-6xl mx-auto px-6">
+
+                <div class="mb-14">
+
+                    <p class="reveal text-xs font-medium text-accent tracking-widest uppercase mb-3">
+                        Social proof
+                    </p>
+
+                    <h2 class="reveal d1 font-display font-bold text-4xl md:text-5xl">
+                        What people say
+                    </h2>
+
+                </div>
+
+
+                <div class="grid md:grid-cols-3 gap-6">
+
+                    {% for testimonial in testimonials %}
+
+                    <blockquote
+                        class="reveal card-h bg-zinc-50 dark:bg-zinc-900 rounded-2xl p-7 border border-zinc-100 dark:border-zinc-800">
+
+                        <div class="flex gap-0.5 mb-5"
+                            aria-label="5 stars">
+
+                            {% for i in "12345" %}
+
+                            <svg class="w-4 h-4 text-accent fill-current"
+                                viewBox="0 0 20 20"
+                                aria-hidden="true">
+
+                                <path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+
+                            </svg>
+
+                            {% endfor %}
+
+                        </div>
+
+
+                        <p class="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed mb-6 italic">
+                            "{{ testimonial.message }}"
+                        </p>
+
+
+                        <footer class="flex items-center gap-3">
+
+                            {% if testimonial.image %}
+
+                            <div class="pf w-10 h-10 rounded-full shrink-0">
+
+                                <img src="{{ testimonial.image.url }}"
+                                    alt="{{ testimonial.name }}">
+
+                            </div>
+
+                            {% endif %}
+
+                            <div>
+
+                                <p class="font-medium text-sm">
+                                    {{ testimonial.name }}
+                                </p>
+
+                                <p class="text-xs text-zinc-500">
+                                    {{ testimonial.role }}
+                                </p>
+
+                            </div>
+
+                        </footer>
+
+                    </blockquote>
+
+                    {% empty %}
+
+                    <p class="text-zinc-500">
+                        Testimonials will be added soon.
+                    </p>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ═══════════════════════════════════════════════
+             BLOG
+        ═══════════════════════════════════════════════ -->
+        <section id="blog"
+            class="py-24 bg-zinc-50 dark:bg-zinc-900/40">
+
+            <div class="max-w-6xl mx-auto px-6">
+
+                <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-14">
+
+                    <div>
+
+                        <p class="reveal text-xs font-medium text-accent tracking-widest uppercase mb-3">
+                            Thoughts
+                        </p>
+
+                        <h2 class="reveal d1 font-display font-bold text-4xl md:text-5xl">
+                            From the blog
+                        </h2>
+
+                    </div>
+
+                    <span class="reveal d1 text-sm text-zinc-500">
+                        Latest articles
+                    </span>
+
+                </div>
+
+
+                <div class="grid md:grid-cols-3 gap-6">
+
+                    {% for post in blog_posts %}
+
+                    <article
+                        class="reveal card-h group bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-100 dark:border-zinc-800 hover:border-accent">
+
+                        <div class="pf w-full h-44">
+
+                            {% if post.image %}
+
+                            <img src="{{ post.image.url }}"
+                                alt="{{ post.title }}"
+                                loading="lazy">
+
+                            {% else %}
+
+                            <div class="w-full h-full flex items-center justify-center bg-zinc-200 dark:bg-zinc-800">
+                                <span class="text-zinc-500">
+                                    No image
+                                </span>
+                            </div>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <div class="p-6">
+
+                            <div class="flex items-center gap-3 mb-3">
+
+                                <span
+                                    class="text-xs bg-orange-50 dark:bg-zinc-800 text-accent border border-orange-200 dark:border-zinc-700 px-2.5 py-1 rounded-full">
+                                    Blog
+                                </span>
+
+                                <span class="text-xs text-zinc-400">
+                                    {{ post.created_at|date:"M d, Y" }}
+                                </span>
+
+                            </div>
+
+
+                            <a href="{% url 'portfolio:blog_detail' post.slug %}">
+
+                                <h3
+                                    class="font-display font-bold text-lg text-zinc-900 dark:text-white mb-2 group-hover:text-accent transition-colors">
+
+                                    {{ post.title }}
+
+                                </h3>
+
+                            </a>
+
+
+                            <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4">
+
+                                {{ post.excerpt }}
+
+                            </p>
+
+
+                            <a href="{% url 'portfolio:blog_detail' post.slug %}"
+                                class="inline-flex items-center gap-1.5 text-sm font-medium nl">
+
+                                Read more →
+
+                            </a>
+
+                        </div>
+
+                    </article>
+
+                    {% empty %}
+
+                    <p class="text-zinc-500">
+                        Blog posts will be added soon.
+                    </p>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ═══════════════════════════════════════════════
+             CONTACT
+        ═══════════════════════════════════════════════ -->
+        <section id="contact" class="py-24">
+
+            <div class="max-w-6xl mx-auto px-6">
+
+                <div class="bg-zinc-900 dark:bg-zinc-800 rounded-3xl p-10 md:p-16 relative overflow-hidden">
+
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-accent/20 rounded-full blur-3xl pointer-events-none"></div>
+
+                    <div class="absolute bottom-0 left-0 w-40 h-40 bg-accent/10 rounded-full blur-2xl pointer-events-none"></div>
+
+
+                    <div class="relative z-10 grid md:grid-cols-2 gap-12 items-start">
+
+                        <!-- Contact information -->
+                        <div>
+
+                            <p class="reveal text-xs font-medium text-accent tracking-widest uppercase mb-3">
+                                Get in touch
+                            </p>
+
+                            <h2 class="reveal d1 font-display font-bold text-4xl md:text-5xl text-white leading-tight mb-5">
+                                Let's work<br>
+                                together
+                            </h2>
+
+                            <p class="reveal d2 text-zinc-400 leading-relaxed mb-8">
+
+                                I am interested in software development, Django projects,
+                                data science and AI. If you would like to discuss a project,
+                                feel free to contact me.
+
+                            </p>
+
+
+                            <div class="reveal d3 flex flex-col gap-4">
+
+                                {% if profile.email %}
+
+                                <a href="mailto:{{ profile.email }}"
+                                    class="group flex items-center gap-3 text-zinc-400 hover:text-white transition-colors">
+
+                                    <span class="w-9 h-9 flex items-center justify-center bg-zinc-800 rounded-lg group-hover:bg-accent/20 shrink-0">
+                                        ✉
+                                    </span>
+
+                                    <span class="text-sm">
+                                        {{ profile.email }}
+                                    </span>
+
+                                </a>
+
+                                {% endif %}
+
+
+                                {% if profile.phone %}
+
+                                <a href="tel:{{ profile.phone }}"
+                                    class="group flex items-center gap-3 text-zinc-400 hover:text-white transition-colors">
+
+                                    <span class="w-9 h-9 flex items-center justify-center bg-zinc-800 rounded-lg group-hover:bg-accent/20 shrink-0">
+                                        ☎
+                                    </span>
+
+                                    <span class="text-sm">
+                                        {{ profile.phone }}
+                                    </span>
+
+                                </a>
+
+                                {% endif %}
+
+
+                                {% for social in social_links %}
+
+                                <a href="{{ social.url }}"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="group flex items-center gap-3 text-zinc-400 hover:text-white transition-colors">
+
+                                    <span class="w-9 h-9 flex items-center justify-center bg-zinc-800 rounded-lg group-hover:bg-accent/20 shrink-0">
+                                        {{ social.icon|default:"↗" }}
+                                    </span>
+
+                                    <span class="text-sm">
+                                        {{ social.platform }}
+                                    </span>
+
+                                </a>
+
+                                {% endfor %}
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Contact Form -->
+                        <div class="reveal d2">
+
+                            <form action="{% url 'portfolio:contact' %}"
+                                method="POST">
+
+                                {% csrf_token %}
+
+                                <div class="flex flex-col gap-4">
+
+                                    <div class="grid sm:grid-cols-2 gap-4">
+
+                                        <div>
+
+                                            <label for="fname"
+                                                class="block text-xs font-medium text-zinc-400 mb-1.5">
+                                                Name *
+                                            </label>
+
+                                            <input type="text"
+                                                id="fname"
+                                                name="name"
+                                                placeholder="Your name"
+                                                required
+                                                class="w-full bg-zinc-800 border border-zinc-700 text-white text-sm rounded-xl px-4 py-3 placeholder-zinc-600 focus:outline-none focus:border-accent transition-colors">
+
+                                        </div>
+
+
+                                        <div>
+
+                                            <label for="femail"
+                                                class="block text-xs font-medium text-zinc-400 mb-1.5">
+                                                Email *
+                                            </label>
+
+                                            <input type="email"
+                                                id="femail"
+                                                name="email"
+                                                placeholder="your@email.com"
+                                                required
+                                                class="w-full bg-zinc-800 border border-zinc-700 text-white text-sm rounded-xl px-4 py-3 placeholder-zinc-600 focus:outline-none focus:border-accent transition-colors">
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div>
+
+                                        <label for="fsubject"
+                                            class="block text-xs font-medium text-zinc-400 mb-1.5">
+                                            Subject
+                                        </label>
+
+                                        <input type="text"
+                                            id="fsubject"
+                                            name="subject"
+                                            placeholder="Project inquiry"
+                                            class="w-full bg-zinc-800 border border-zinc-700 text-white text-sm rounded-xl px-4 py-3 placeholder-zinc-600 focus:outline-none focus:border-accent transition-colors">
+
+                                    </div>
+
+
+                                    <div>
+
+                                        <label for="fmessage"
+                                            class="block text-xs font-medium text-zinc-400 mb-1.5">
+                                            Message *
+                                        </label>
+
+                                        <textarea id="fmessage"
+                                            name="message"
+                                            rows="4"
+                                            placeholder="Tell me about your project..."
+                                            required
+                                            class="w-full bg-zinc-800 border border-zinc-700 text-white text-sm rounded-xl px-4 py-3 placeholder-zinc-600 focus:outline-none focus:border-accent transition-colors resize-none"></textarea>
+
+                                    </div>
+
+
+                                    <button type="submit"
+                                        class="shimmer w-full bg-accent text-white font-display font-bold text-sm py-3.5 rounded-xl hover:bg-accent-light transition-colors">
+
+                                        Send message →
+
+                                    </button>
+
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ═══════════════════════════════════════════════
+         FOOTER
+    ═══════════════════════════════════════════════ -->
+
+    <footer class="border-t border-zinc-100 dark:border-zinc-900">
+
+        <div class="max-w-6xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+
+            <p class="text-sm text-zinc-400">
+                © <span id="yr"></span>
+                Zayebul Fardoush Zitu.
+                All rights reserved.
+            </p>
+
+            <p class="text-xs text-zinc-500">
+                Built with
+                <a href="https://tailwindcss.com"
+                    target="_blank"
+                    class="hover:text-accent transition-colors">
+                    Tailwind CSS
+                </a>
+                &amp;
+                <a href="https://alpinejs.dev"
+                    target="_blank"
+                    class="hover:text-accent transition-colors">
+                    Alpine.js
+                </a>
+                &amp; Django
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- ═══════════════════════════════════════════════
+         JAVASCRIPT
+    ═══════════════════════════════════════════════ -->
+
+    <script>
+
+        function app() {
+
+            return {
+
+                dark: false,
+
+                mm: false,
+
+                sc: false,
+
+                s: 'hero',
+
+
+                init() {
+
+                    /* Dark mode */
+
+                    this.dark =
+                        localStorage.getItem('theme') === 'dark' ||
+                        (
+                            !localStorage.getItem('theme') &&
+                            window.matchMedia('(prefers-color-scheme: dark)').matches
+                        );
+
+
+                    this.$watch(
+                        'dark',
+                        value => {
+                            localStorage.setItem(
+                                'theme',
+                                value ? 'dark' : 'light'
+                            );
+                        }
+                    );
+
+
+                    /* Scroll */
+
+                    window.addEventListener(
+                        'scroll',
+                        () => {
+
+                            this.sc = window.scrollY > 20;
+
+                            this.updateSection();
+
+                        },
+                        { passive: true }
+                    );
+
+
+                    /* Reveal animation */
+
+                    const io = new IntersectionObserver(
+
+                        entries => {
+
+                            entries.forEach(entry => {
+
+                                if (entry.isIntersecting) {
+
+                                    entry.target.classList.add('in');
+
+                                    io.unobserve(entry.target);
+
+                                }
+
+                            });
+
+                        },
+
+                        {
+                            threshold: 0.1,
+                            rootMargin: '0px 0px -40px 0px'
+                        }
+
+                    );
+
+
+                    document
+                        .querySelectorAll('.reveal')
+                        .forEach(el => io.observe(el));
+
+
+                    /* Current year */
+
+                    const year = document.getElementById('yr');
+
+                    if (year) {
+
+                        year.textContent =
+                            new Date().getFullYear();
+
+                    }
+
+                },
+
+
+                updateSection() {
+
+                    const atBottom =
+                        (
+                            window.innerHeight +
+                            window.scrollY
+                        ) >=
+                        document.body.scrollHeight - 60;
+
+
+                    if (atBottom) {
+
+                        this.s = 'contact';
+
+                        return;
+
+                    }
+
+
+                    const ids = [
+                        'contact',
+                        'blog',
+                        'reviews',
+                        'about',
+                        'work',
+                        'services',
+                        'hero'
+                    ];
+
+
+                    for (const id of ids) {
+
+                        const el =
+                            document.getElementById(id);
+
+
+                        if (
+                            el &&
+                            window.scrollY >=
+                            el.offsetTop - 130
+                        ) {
+
+                            this.s = id;
+
+                            return;
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>

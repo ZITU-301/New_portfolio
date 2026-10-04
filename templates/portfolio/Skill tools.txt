@@ -1,0 +1,32 @@
+                        <div class="reveal d4">
+
+                            <p
+                                class="text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-widest mb-3">
+                                Skills & tools
+                            </p>
+
+                            <div class="flex flex-wrap gap-2"
+                                role="list"
+                                aria-label="Skills">
+
+                                {% for skill in skills %}
+
+                                <span role="listitem"
+                                    class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">
+
+                                    {{ skill.name }}
+
+                                </span>
+
+                                {% empty %}
+
+                                <span class="text-sm text-zinc-500">
+                                    Skills will be added soon.
+                                </span>
+
+                                {% endfor %}
+
+                            </div>
+                        </div>
+
+
